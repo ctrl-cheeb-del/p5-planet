@@ -6,15 +6,14 @@ const palettes = [[[237,102,53],[253,186,19],[69,89,135]],[[137, 243, 255],[62, 
 // let noiseScaleMin = 50;
 // let noiseScaleMax = 5000;
 // let noiseScaleStep = 10;
-// gui.addGlobals('nums');
+// // gui.addGlobals('nums');
 
 let particles_a = [];
 let particles_b = [];
 let particles_c = [];
 
-let num = 1500;
 let noiseScale = 500;
-
+let nums = 1500;
 let radius = 300;
 
 let color1;
