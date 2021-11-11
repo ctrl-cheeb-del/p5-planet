@@ -16,14 +16,6 @@ const palettes = [
 	],
 ];
 
-// const gui = createGui('My awesome GUI');
-
-// let noiseScale = 1500;
-// let noiseScaleMin = 50;
-// let noiseScaleMax = 5000;
-// let noiseScaleStep = 10;
-// // gui.addGlobals('nums');
-
 let particles_a = [];
 let particles_b = [];
 let particles_c = [];
@@ -35,6 +27,7 @@ let radius = 300;
 let color1;
 let color2;
 let color3;
+let slider;
 
 function setup() {
 	createCanvas(720, 720);
@@ -63,9 +56,11 @@ function setup() {
 	color1 = palette[0];
 	color2 = palette[1];
 	color3 = palette[2];
+	slider = createSlider(50, 1000, 500, 10);
 }
 
 function draw() {
+	let noiseScale = slider.value();
 	// noStroke();
 	smooth();
 	for (let i = 0; i < nums; i++) {
@@ -73,26 +68,20 @@ function draw() {
 		let alpha = map(i, 0, nums, 0, 250);
 
 		fill(color1[0], color1[1], color1[2], alpha);
-		particles_a[i].move();
+		particles_a[i].move(noiseScale);
 		particles_a[i].checkEdge(radius);
 		particles_a[i].display(sz);
 
 		fill(color2[0], color2[1], color2[2], alpha);
-		particles_b[i].move();
+		particles_b[i].move(noiseScale);
 		particles_b[i].checkEdge(radius);
 		particles_b[i].display(sz);
 
 		fill(color3[0], color3[1], color3[2], alpha);
-		particles_c[i].move();
+		particles_c[i].move(noiseScale);
 		particles_c[i].checkEdge(radius);
 		particles_c[i].display(sz);
 	}
-	// noFill();
-	// strokeWeight(1);
-	// stroke(255);
-	// ellipse(width /2, height /2, radius * 2 + 1)
-	// rotate(PI / 2);
-	// ellipse(width /2, height /2, radius * 2 + 50,10)
 }
 
 function Particle(x, y, r) {
@@ -103,7 +92,7 @@ function Particle(x, y, r) {
 
 	//balf in mouf
 
-	this.move = function () {
+	this.move = function (noiseScale) {
 		let angle =
 			noise(this.pos.x / noiseScale, this.pos.y / noiseScale) *
 			TWO_PI *
@@ -115,7 +104,7 @@ function Particle(x, y, r) {
 		this.pos.add(this.vel);
 	};
 
-	this.checkEdge = function (radious) {
+	this.checkEdge = function (radius) {
 		if (dist(width / 2, height / 2, this.pos.x, this.pos.y) > radius) {
 			let angle = Math.random() * Math.PI * 2;
 			this.pos.x = cos(angle) * radius + width / 2;
