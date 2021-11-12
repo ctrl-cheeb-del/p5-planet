@@ -34,8 +34,7 @@ let color2;
 let color3;
 let slider;
 
-function setup() {
-	createCanvas(720, 720);
+function AHHHHHH() {
 	background(100);
 	fill(0, 0, 33);
 	noStroke();
@@ -56,12 +55,20 @@ function setup() {
 		);
 	}
 	let a = int(random(0, palettes.length));
-	//print(a);
 	let palette = palettes[a];
 	color1 = palette[0];
 	color2 = palette[1];
 	color3 = palette[2];
+}
+
+function setup() {
+	createCanvas(720, 720);
+
+	AHHHHHH();
+
 	slider = createSlider(50, 1000, 500, 10);
+	resetButton = createButton("Reset");
+	resetButton.mousePressed(reset);
 }
 
 function draw() {
@@ -87,6 +94,13 @@ function draw() {
 		particles_c[i].checkEdge(radius);
 		particles_c[i].display(sz);
 	}
+}
+
+function reset() {
+	particles_a = [];
+	particles_b = [];
+	particles_c = [];
+	AHHHHHH();
 }
 
 function Particle(x, y, r) {
