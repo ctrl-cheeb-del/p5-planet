@@ -67,10 +67,6 @@ function AHHHHHH(index) {
   color3 = palette[2];
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 function setup() {
   createCanvas(windowWidth, windowHeight - 50);
   radius = (windowHeight - 200) / 2;
