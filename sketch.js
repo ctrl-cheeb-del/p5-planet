@@ -27,7 +27,7 @@ let particles_c = [];
 
 let noiseScale = 500;
 let nums = 1500;
-let radius = 300;
+let radius;
 
 let color1;
 let color2;
@@ -38,20 +38,21 @@ function AHHHHHH(index) {
   background(100);
   fill(0, 0, 33);
   noStroke();
-  rect(0, 0, width, height);
+  rect(0, 0, windowWidth, windowHeight);
   for (let i = 0; i < nums; i++) {
-    let padding = width / 2 - radius;
+    let padding = windowWidth / 2 - radius;
+    let vertPadding = (windowHeight - 50) / 2 - radius;
     particles_a[i] = new Particle(
       random(padding, width - padding),
-      random(padding, height - padding)
+      random(vertPadding, height + vertPadding)
     );
     particles_b[i] = new Particle(
       random(padding, width - padding),
-      random(padding, height - padding)
+      random(vertPadding, height + vertPadding)
     );
     particles_c[i] = new Particle(
       random(padding, width - padding),
-      random(padding, height - padding)
+      random(vertPadding, height + vertPadding)
     );
   }
   let palette;
@@ -67,7 +68,8 @@ function AHHHHHH(index) {
 }
 
 function setup() {
-  createCanvas(720, 720);
+  createCanvas(windowWidth, windowHeight - 50);
+  radius = (windowHeight - 200) / 2;
 
   AHHHHHH();
 
@@ -80,8 +82,12 @@ function setup() {
       `color${i}Button.style("background-color", color(palettes[${i}][0], palettes[${i}][1], palettes[${i}][2]))`
     );
     eval(`color${i}Button.mousePressed(() => { AHHHHHH(${i}) })`);
-    eval(`color${i}Button.position(750, ${10 + 110 * i})`);
-    eval(`color${i}Button.size(200, 100);`);
+    eval(
+      `color${i}Button.position(${windowWidth / 2 + radius + 50}, ${
+        (windowHeight - 50) / 2 - radius + (windowHeight / 8) * i
+      })`
+    );
+    eval(`color${i}Button.size(200, ${windowHeight / 12});`);
   }
 }
 
