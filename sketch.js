@@ -34,7 +34,7 @@ let color2;
 let color3;
 let slider;
 
-function AHHHHHH() {
+function AHHHHHH(index) {
   background(100);
   fill(0, 0, 33);
   noStroke();
@@ -54,8 +54,13 @@ function AHHHHHH() {
       random(padding, height - padding)
     );
   }
-  let a = int(random(0, palettes.length));
-  let palette = palettes[a];
+  let palette;
+  if (index == undefined) {
+    let a = int(random(0, palettes.length));
+    palette = palettes[a];
+  } else {
+    palette = palettes[index];
+  }
   color1 = palette[0];
   color2 = palette[1];
   color3 = palette[2];
@@ -66,9 +71,18 @@ function setup() {
 
   AHHHHHH();
 
-  slider = createSlider(50, 2000, 500, 10);
+  slider = createSlider(50, 1000, 500, 10);
   resetButton = createButton("Reset");
   resetButton.mousePressed(reset);
+  for (let i = 0; i < palettes.length; i++) {
+    eval(`color${i}Button = createButton("")`);
+    eval(
+      `color${i}Button.style("background-color", color(palettes[${i}][0], palettes[${i}][1], palettes[${i}][2]))`
+    );
+    eval(`color${i}Button.mousePressed(() => { AHHHHHH(${i}) })`);
+    eval(`color${i}Button.position(750, ${10 + 110 * i})`);
+    eval(`color${i}Button.size(200, 100);`);
+  }
 }
 
 function draw() {
